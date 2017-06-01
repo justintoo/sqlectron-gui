@@ -3,11 +3,10 @@ version: '1.0.{build}'
 platform:
   - x64
 
-cache:
-  - node_modules -> package.json
-  - app\node_modules -> package.json
-  - '%APPDATA%\npm-cache'
-  - '%USERPROFILE%\.electron'
+# cache:
+#   - node_modules -> package.json
+#   - '%APPDATA%\npm-cache'
+#   - '%USERPROFILE%\.electron'
 
 environment:
   GH_TOKEN:
@@ -19,7 +18,8 @@ init:
 install:
   - ps: Install-Product node 6 x64
   - git reset --hard HEAD
-  - npm install npm -g
+  - rm -rf node_modules
+  - npm install npm@4 -g
   - npm prune
   - npm install
 
